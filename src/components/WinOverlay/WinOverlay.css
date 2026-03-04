@@ -1,0 +1,127 @@
+.win-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 24px;
+}
+
+/* Win message */
+.win-message {
+    text-align: center;
+    max-width: 500px;
+}
+
+.win-message h2 {
+    font-family: var(--font-display);
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 24px;
+}
+
+.win-message p {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.8;
+    margin-bottom: 12px;
+}
+
+.win-message .win-heart {
+    color: var(--warm-blush);
+}
+
+/* Slideshow */
+.slideshow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: min(400px, 85vw);
+    width: 100%;
+}
+
+.slideshow-image-container {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.slideshow-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slideshow-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(232, 160, 191, 0.1), rgba(201, 169, 110, 0.1));
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 48px;
+}
+
+.slideshow-placeholder span {
+    font-size: 14px;
+    margin-top: 8px;
+    font-family: var(--font-body);
+}
+
+.slideshow-caption {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.75);
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.slideshow-date {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.35);
+    margin-bottom: 32px;
+}
+
+.slideshow-hint {
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.2);
+    position: fixed;
+    bottom: 32px;
+}
+
+.slideshow-counter {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.25);
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 640px) {
+    .win-message h2 {
+        font-size: 32px;
+    }
+
+    .win-message p {
+        font-size: 15px;
+    }
+}

@@ -1,0 +1,175 @@
+.letter-container {
+    position: fixed;
+    inset: 0;
+    z-index: 5000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #0B0D17 0%, #1a1030 50%, #0B0D17 100%);
+}
+
+/* Envelope wrapper */
+.envelope {
+    position: relative;
+    width: min(420px, 85vw);
+    cursor: pointer;
+    perspective: 800px;
+}
+
+/* Envelope body */
+.envelope-body {
+    background: var(--ivory-cream);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    padding: 40px 32px;
+    position: relative;
+    z-index: 2;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: min-height 0.6s var(--ease-smooth);
+}
+
+.envelope-body.is-open {
+    min-height: 380px;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+/* Envelope flap */
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    z-index: 1;
+    transform-origin: top center;
+    transform-style: preserve-3d;
+    transition: transform 0.8s var(--ease-smooth);
+}
+
+.envelope-flap.is-open {
+    transform: rotateX(-180deg);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.8s var(--ease-smooth), opacity 0.5s 0.3s var(--ease-smooth);
+}
+
+.flap-front {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, #e8dccf 0%, var(--ivory-cream) 100%);
+    clip-path: polygon(0 0, 50% 100%, 100% 0);
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    backface-visibility: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+}
+
+.flap-back {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #e8dccf, #d4c5b5);
+    clip-path: polygon(0 0, 50% 100%, 100% 0);
+    backface-visibility: hidden;
+    transform: rotateX(180deg);
+}
+
+/* Front label */
+.envelope-front-label {
+    text-align: center;
+    z-index: 1;
+}
+
+.envelope-front-label h2 {
+    font-family: var(--font-handwritten);
+    font-size: 32px;
+    color: var(--text-dark);
+    font-weight: 400;
+    margin-bottom: 12px;
+}
+
+.envelope-front-label p {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: rgba(44, 44, 44, 0.5);
+    font-weight: 300;
+    letter-spacing: 1px;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Letter content inside */
+.letter-content {
+    width: 100%;
+    padding-top: 8px;
+}
+
+.letter-content p {
+    font-family: var(--font-handwritten);
+    font-size: 20px;
+    color: var(--text-dark);
+    line-height: 1.9;
+    margin-bottom: 8px;
+}
+
+.letter-content .letter-greeting {
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+.letter-content .letter-highlight {
+    font-family: var(--font-accent);
+    font-size: 32px;
+    color: var(--champagne-gold);
+    margin-top: 24px;
+    text-align: center;
+}
+
+/* Swipe indicator */
+.swipe-indicator {
+    position: absolute;
+    bottom: -70px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.swipe-indicator span {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.swipe-indicator .arrow {
+    font-size: 20px;
+    animation: gentleBounce 1.5s ease-in-out infinite;
+}
+
+@media (max-width: 640px) {
+    .envelope-body {
+        padding: 28px 20px;
+    }
+
+    .envelope-front-label h2 {
+        font-size: 26px;
+    }
+
+    .letter-content p {
+        font-size: 17px;
+    }
+
+    .letter-content .letter-greeting {
+        font-size: 20px;
+    }
+
+    .letter-content .letter-highlight {
+        font-size: 26px;
+    }
+}
