@@ -55,7 +55,7 @@ export default function Homepage() {
                 </motion.div>
 
                 <motion.p className="homepage-paragraph" variants={itemVariants}>
-                    Ramzan Mubarak, my love 🌙✨💖 In this beautiful and blessed month 🤲, I pray that Allah fills your life with peace 🕊️, happiness 😊, and endless blessings 🌸✨. May all your prayers be answered 🤍 and your heart always stay calm and strong 💫. You mean so much to me 🥺❤️, and I feel truly lucky to have you in my life 💕.<br />
+                    Ramzan Mubarak, Hosneara 🌙✨💖 In this beautiful and blessed month 🤲, I pray that Allah fills your life with peace 🕊️, happiness 😊, and endless blessings 🌸✨. May all your prayers be answered 🤍 and your heart always stay calm and strong 💫. You mean so much to me 🥺❤️, and I feel truly lucky to have you in my life 💕.<br />
                     Let's celebrate this special time together 🥰🤝✨, filled with talks 🗣️, laughter 😂, and peaceful moments 🕊️ that we'll always remember 💭💕. Being with you makes everything feel more meaningful 😌❤️, and I truly feel lucky 🫣 to have you in my life 💕🤞🏻. I pray that this Ramzan brings you endless happiness 🤲🏻😊, peace 🕊️, and all the blessings 🤲✨ your heart deserves 💗. Can't wait to spend this beautiful day with you 😍🙈🙈🌸.
                 </motion.p>
 

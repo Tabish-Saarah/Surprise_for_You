@@ -11,11 +11,11 @@
     contain: content;
 }
 
-/* Decorative Crescent — use text-shadow instead of filter for better mobile perf */
+/* Decorative Crescent */
 .homepage-crescent {
     font-size: 56px;
     margin-bottom: 24px;
-    text-shadow: 0 0 25px rgba(212, 168, 67, 0.4);
+    text-shadow: 0 0 15px rgba(212, 168, 67, 0.25);
     animation: floatCrescent 6s ease-in-out infinite;
 }
 
@@ -41,7 +41,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: shimmer 4s linear infinite;
+    /* Removed shimmer animation: animating background-position causes severe per-frame repaints */
     margin-bottom: 20px;
 }
 
@@ -80,10 +80,7 @@
     font-size: 52px;
     font-weight: 400;
     color: var(--crescent-gold);
-    text-shadow:
-        0 0 30px rgba(212, 168, 67, 0.5),
-        0 0 60px rgba(212, 168, 67, 0.25),
-        0 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 0 15px rgba(212, 168, 67, 0.4);
     animation: eidGlow 4s ease-in-out infinite;
     letter-spacing: 2px;
 }
@@ -106,13 +103,10 @@
     font-size: 30px;
     font-weight: 400;
     color: rgba(240, 214, 138, 0.85);
-    text-shadow:
-        0 0 20px rgba(212, 168, 67, 0.3),
-        0 0 40px rgba(212, 168, 67, 0.15);
+    text-shadow: 0 0 10px rgba(212, 168, 67, 0.3);
     margin-bottom: 0;
     text-align: left;
     padding-left: 4px;
-    /* Replaced toMyGlow animation — static shadow is sufficient, no per-frame paint */
 }
 
 .homepage-name {
@@ -121,11 +115,7 @@
     font-weight: 400;
     color: var(--white);
     line-height: 1.1;
-    text-shadow:
-        0 0 40px rgba(212, 168, 67, 0.35),
-        0 0 80px rgba(212, 168, 67, 0.15),
-        0 2px 4px rgba(0, 0, 0, 0.3);
-    /* Removed nameGlow animation — text-shadow repaints are very expensive on mobile */
+    text-shadow: 0 0 20px rgba(212, 168, 67, 0.4);
     position: relative;
 }
 
@@ -147,10 +137,7 @@
     text-align: center;
     margin-top: 28px;
     letter-spacing: 1.5px;
-    text-shadow:
-        0 0 20px rgba(212, 168, 67, 0.3),
-        0 0 40px rgba(212, 168, 67, 0.15);
-    /* Removed signatureGlow animation for performance */
+    text-shadow: 0 0 10px rgba(212, 168, 67, 0.25);
 }
 
 /* Responsive */

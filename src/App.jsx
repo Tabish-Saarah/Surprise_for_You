@@ -58,52 +58,60 @@ export default function App() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
           >
+            {/* Homepage mounts immediately for the cross-fade effect */}
             <Homepage />
-            <Suspense fallback={null}>
-              <LetterPage />
-              <PhotoCarousel />
-              <MemoryGame onWin={handleWin} />
-            </Suspense>
 
-            {/* Secret video section */}
-            <section id="secret" className="video-section">
-              <motion.h4
-                className="section-heading"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                style={{
-                  fontFamily: 'var(--font-ui)',
-                  fontSize: '14px',
-                  fontWeight: 500,
-                  textTransform: 'uppercase',
-                  letterSpacing: '3px',
-                  color: 'rgba(255, 255, 255, 0.4)',
-                  marginBottom: '40px',
-                }}
-              >
-                Something Special 🌟
-              </motion.h4>
+            {/* Everything else mounts ONLY AFTER the fade-out animation finishes.
+                This prevents React DOM construction from lagging the animation! */}
+            {letterExitDone && (
+              <>
+                <Suspense fallback={null}>
+                  <LetterPage />
+                  <PhotoCarousel />
+                  <MemoryGame onWin={handleWin} />
+                </Suspense>
 
-              <motion.button
-                className="secret-btn"
-                onClick={() => setShowVideoModal(true)}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                Secret
-              </motion.button>
-            </section>
+                {/* Secret video section */}
+                <section id="secret" className="video-section">
+                  <motion.h4
+                    className="section-heading"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    style={{
+                      fontFamily: 'var(--font-ui)',
+                      fontSize: '14px',
+                      fontWeight: 500,
+                      textTransform: 'uppercase',
+                      letterSpacing: '3px',
+                      color: 'rgba(255, 255, 255, 0.4)',
+                      marginBottom: '40px',
+                    }}
+                  >
+                    Something Special 🌟
+                  </motion.h4>
 
-            {/* Footer */}
-            <footer className="app-footer">
-              <p className="footer-text">Made with ❤️ for Hosneara | Eid Mubarak 🌙</p>
-            </footer>
+                  <motion.button
+                    className="secret-btn"
+                    onClick={() => setShowVideoModal(true)}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.1 }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.97 }}
+                  >
+                    Secret
+                  </motion.button>
+                </section>
+
+                {/* Footer */}
+                <footer className="app-footer">
+                  <p className="footer-text">Made with ❤️ for Hosneara | Eid Mubarak 🌙</p>
+                </footer>
+              </>
+            )}
           </motion.main>
         </>
       )}
