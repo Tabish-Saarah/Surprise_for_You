@@ -121,6 +121,12 @@
 }
 
 @media (max-width: 640px) {
+    .win-overlay {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        background: rgba(0, 0, 0, 0.98);
+    }
+
     .win-message h2 {
         font-size: 32px;
     }

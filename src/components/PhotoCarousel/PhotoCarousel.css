@@ -22,6 +22,7 @@
     width: min(400px, 85vw);
     aspect-ratio: 3 / 4;
     border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     overflow: hidden;
     border: 1px solid rgba(212, 168, 67, 0.12);
     background: rgba(248, 244, 232, 0.03);
@@ -29,7 +30,7 @@
     box-shadow:
         0 20px 60px rgba(0, 0, 0, 0.3),
         0 0 0 1px rgba(212, 168, 67, 0.08);
-    transition: box-shadow 0.5s var(--ease-smooth), transform 0.5s var(--ease-smooth);
+    transition: transform 0.5s var(--ease-smooth);
 }
 
 .carousel-container:hover {

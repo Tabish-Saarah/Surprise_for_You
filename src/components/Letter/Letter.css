@@ -7,6 +7,7 @@
     justify-content: center;
     background: linear-gradient(180deg, #0A1628 0%, #0D2137 50%, #0A1628 100%);
     overflow: hidden;
+    contain: layout style;
 }
 
 /* ─── Ambient Background Decorations ─── */
@@ -24,7 +25,7 @@
     font-size: 64px;
     opacity: 0.12;
     animation: floatSlow 8s ease-in-out infinite;
-    filter: drop-shadow(0 0 30px rgba(212, 168, 67, 0.4));
+    text-shadow: 0 0 30px rgba(212, 168, 67, 0.4);
 }
 
 .ambient-star {
@@ -51,8 +52,8 @@
 }
 
 @keyframes floatSlow {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-15px) rotate(5deg); }
+    0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+    50% { transform: translate3d(0, -15px, 0) rotate(5deg); }
 }
 
 @keyframes twinkle {
@@ -61,8 +62,8 @@
 }
 
 @keyframes breatheGlow {
-    0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
-    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
 }
 
 /* ─── Envelope ─── */
@@ -255,9 +256,10 @@
     animation: highlightGlow 3s ease-in-out infinite;
 }
 
+/* Replaced text-shadow animation with simple opacity for performance */
 @keyframes highlightGlow {
-    0%, 100% { text-shadow: 0 0 20px rgba(212, 168, 67, 0.2); }
-    50% { text-shadow: 0 0 40px rgba(212, 168, 67, 0.5); }
+    0%, 100% { opacity: 0.85; }
+    50% { opacity: 1; }
 }
 
 /* ─── Swipe Indicator ─── */

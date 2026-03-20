@@ -74,9 +74,8 @@ export default function Letter({ onDismiss }) {
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
             onWheel={handleScroll}
-            style={{ willChange: 'opacity, transform' }}
             exit={{ opacity: 0, y: '-15vh' }}
-            transition={{ duration: 1.0, ease: [0.4, 0, 0.2, 1] }}
+            transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
         >
             {/* Decorative ambient elements */}
             <div className="letter-ambient">

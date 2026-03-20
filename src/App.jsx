@@ -1,4 +1,4 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
+import { useState, useCallback, lazy, Suspense } from 'react';
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 import Letter from './components/Letter/Letter';
 import Navbar from './components/Navbar/Navbar';
@@ -13,14 +13,20 @@ const WinOverlay = lazy(() => import('./components/WinOverlay/WinOverlay'));
 const VideoModal = lazy(() => import('./components/VideoModal/VideoModal'));
 const LetterPage = lazy(() => import('./components/LetterPage/LetterPage'));
 
+// Scroll progress bar — extracted so useScroll only runs when mounted
+function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+  return <motion.div className="scroll-progress" style={{ scaleX }} />;
+}
+
 export default function App() {
   const [letterDismissed, setLetterDismissed] = useState(false);
   const [letterExitDone, setLetterExitDone] = useState(false);
   const [showWinOverlay, setShowWinOverlay] = useState(false);
   const [showVideoModal, setShowVideoModal] = useState(false);
 
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+  const handleWin = useCallback(() => setShowWinOverlay(true), []);
 
   return (
     <>
@@ -42,24 +48,21 @@ export default function App() {
       */}
       {letterDismissed && (
         <>
-          {/* Scroll progress bar */}
-          <motion.div
-            className="scroll-progress"
-            style={{ scaleX }}
-          />
+          {/* Scroll progress bar — only mounted after letter is gone */}
+          <ScrollProgress />
 
           <Navbar />
 
           <motion.main
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1.0, ease: [0.4, 0, 0.2, 1] }}
+            transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
           >
             <Homepage />
             <Suspense fallback={null}>
               <LetterPage />
               <PhotoCarousel />
-              <MemoryGame onWin={() => setShowWinOverlay(true)} />
+              <MemoryGame onWin={handleWin} />
             </Suspense>
 
             {/* Secret video section */}
