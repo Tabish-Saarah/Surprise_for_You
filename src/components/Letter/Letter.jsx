@@ -5,16 +5,16 @@ import './Letter.css';
 const letterLines = [
     { text: 'Hiii My dear Saarah.. ❤️😉', className: 'letter-greeting' },
     { text: 'Here is a little surprise for you,' },
-    { text: 'just an emotional moment shared by me.' },
+    { text: 'Eid Mubarak🌙 to my bestest 😌✨.' },
     { text: '' },
     { text: 'We crossed days, months, years' },
     { text: 'with too much love, fights, jokes,' },
     { text: 'and funny moments…' },
     { text: '' },
-    { text: 'This will continue forever… always!!' },
+    { text: 'This will continue forever…♾️ always!!' },
 ];
 
-const highlightLine = 'I friend you Saarah 🎀 🫶🏻';
+const highlightLine = 'I friend you Saarah 🩵 🫶🏻';
 
 export default function Letter({ onDismiss }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -74,18 +74,45 @@ export default function Letter({ onDismiss }) {
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
             onWheel={handleScroll}
-            exit={{ opacity: 0, y: '-30vh', scale: 0.95 }}
-            transition={{ duration: 1.3, ease: [0.4, 0, 0.2, 1] }}
+            style={{ willChange: 'opacity, transform' }}
+            exit={{ opacity: 0, y: '-15vh' }}
+            transition={{ duration: 1.0, ease: [0.4, 0, 0.2, 1] }}
         >
+            {/* Decorative ambient elements */}
+            <div className="letter-ambient">
+                <div className="ambient-crescent">🌙</div>
+                <div className="ambient-star star-1">✦</div>
+                <div className="ambient-star star-2">✦</div>
+                <div className="ambient-star star-3">⭐</div>
+                <div className="ambient-glow"></div>
+            </div>
+
             <div className="envelope" onClick={handleEnvelopeTap}>
-                {/* Envelope flap */}
+                {/* Envelope flap — sits on top of the card */}
                 <div className={`envelope-flap ${isOpen ? 'is-open' : ''}`}>
-                    <div className="flap-front" />
+                    <div className="flap-front">
+                        <div className="flap-ornament">☪</div>
+                    </div>
                     <div className="flap-back" />
                 </div>
 
-                {/* Envelope body */}
+                {/* Wax seal at the tip of the flap triangle */}
+                <motion.div
+                    className={`wax-seal ${isOpen ? 'is-open' : ''}`}
+                    animate={isOpen ? { scale: 0, opacity: 0, rotate: 180 } : { scale: 1, opacity: 1, rotate: 0 }}
+                    transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                >
+                    🌙
+                </motion.div>
+
+                {/* Single unified envelope body */}
                 <div className={`envelope-body ${isOpen ? 'is-open' : ''}`}>
+                    {/* Corner ornaments */}
+                    <div className="envelope-ornament top-left">✦</div>
+                    <div className="envelope-ornament top-right">✦</div>
+                    <div className="envelope-ornament bottom-left">✦</div>
+                    <div className="envelope-ornament bottom-right">✦</div>
+
                     {/* Front label — show before opening */}
                     {!showContent && (
                         <motion.div
@@ -93,6 +120,7 @@ export default function Letter({ onDismiss }) {
                             animate={isOpen ? { opacity: 0, y: -20 } : { opacity: 1, y: 0 }}
                             transition={{ duration: 0.4 }}
                         >
+                            <div className="envelope-bismillah">بسم الله</div>
                             <h2>Dear Saarah</h2>
                             {!isOpen && <p>Tap to fully open</p>}
                         </motion.div>
@@ -135,9 +163,14 @@ export default function Letter({ onDismiss }) {
                                 {showHighlight && (
                                     <motion.p
                                         className="letter-highlight"
-                                        initial={{ opacity: 0, scale: 0.9 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+                                        initial={{ opacity: 0, scale: 0.7, y: 20 }}
+                                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                                        transition={{
+                                            duration: 1.6,
+                                            ease: [0.16, 1, 0.3, 1],
+                                            opacity: { duration: 1.2, ease: 'easeOut' },
+                                            scale: { duration: 1.8, ease: [0.16, 1, 0.3, 1] },
+                                        }}
                                     >
                                         {highlightLine}
                                     </motion.p>
@@ -161,7 +194,7 @@ export default function Letter({ onDismiss }) {
                                 onDismiss();
                             }}
                         >
-                            <span>Swipe up to continue</span>
+                            <span>Tap to continue</span>
                             <div className="arrow">↓</div>
                         </motion.div>
                     )}

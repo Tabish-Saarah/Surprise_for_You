@@ -73,7 +73,7 @@ export default function WinOverlay({ onClose }) {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.9, duration: 0.5 }}
                         >
-                            Jokes apart you are my true one 🫶🏻🥰
+                            Jokes apart 😜!! You are my true one 🫶🏻🥰!!
                         </motion.p>
                     </motion.div>
                 )}

@@ -2,27 +2,28 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import './Effects.css';
 
 // ─── Floating Background Particles ───
-const PARTICLE_COUNT = 25;
-const PARTICLE_SYMBOLS = ['✨', '💫', '·', '·', '·', '·', '✦'];
+const PARTICLE_COUNT = 20;
+const PARTICLE_SYMBOLS = ['✨', '🌙', '⭐', '·', '·', '·', '·', '✦', '✧'];
 
 function createParticle(index) {
-    const isEmoji = Math.random() > 0.7;
+    const isEmoji = Math.random() > 0.65;
     const symbol = isEmoji
-        ? PARTICLE_SYMBOLS[Math.floor(Math.random() * 2)]
+        ? PARTICLE_SYMBOLS[Math.floor(Math.random() * 3)]
         : null;
     return {
         id: index,
         left: Math.random() * 100,
-        size: isEmoji ? Math.random() * 10 + 8 : Math.random() * 4 + 2,
-        duration: Math.random() * 15 + 10,
-        delay: Math.random() * 15,
-        opacity: Math.random() * 0.25 + 0.08,
+        size: isEmoji ? Math.random() * 12 + 8 : Math.random() * 4 + 2,
+        duration: Math.random() * 18 + 12,
+        delay: Math.random() * 18,
+        opacity: Math.random() * 0.3 + 0.08,
         symbol,
+        drift: (Math.random() - 0.5) * 60,
         color: isEmoji
             ? undefined
             : Math.random() > 0.5
-                ? 'rgba(232,160,191,0.4)'
-                : 'rgba(201,169,110,0.3)',
+                ? 'rgba(46,196,182,0.35)'
+                : 'rgba(212,168,67,0.3)',
     };
 }
 
@@ -46,6 +47,7 @@ export function FloatingParticles() {
                         animationDuration: `${p.duration}s`,
                         animationDelay: `${p.delay}s`,
                         '--particle-opacity': p.opacity,
+                        '--particle-drift': `${p.drift}px`,
                     }}
                 >
                     {p.symbol}
@@ -56,13 +58,13 @@ export function FloatingParticles() {
 }
 
 // ─── Click/Tap Sparkle Burst ───
-const SPARKLE_EMOJIS = ['✨', '💫', '💖', '🤍', '⭐', '🫶🏻'];
+const SPARKLE_EMOJIS = ['✨', '🌙', '⭐', '🤲', '💫', '✦'];
 
 function createSparkles(x, y) {
-    const count = 6 + Math.floor(Math.random() * 4);
+    const count = 7 + Math.floor(Math.random() * 5);
     return Array.from({ length: count }, (_, i) => {
         const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.5;
-        const dist = 40 + Math.random() * 50;
+        const dist = 45 + Math.random() * 60;
         return {
             id: Date.now() + i,
             x,
@@ -70,7 +72,8 @@ function createSparkles(x, y) {
             tx: Math.cos(angle) * dist,
             ty: Math.sin(angle) * dist,
             emoji: SPARKLE_EMOJIS[Math.floor(Math.random() * SPARKLE_EMOJIS.length)],
-            size: 10 + Math.random() * 10,
+            size: 10 + Math.random() * 12,
+            rotation: Math.random() * 360,
         };
     });
 }
@@ -83,11 +86,10 @@ export function SparkleOnClick() {
         const newSparkles = createSparkles(clientX, clientY);
         setSparkles((prev) => [...prev, ...newSparkles]);
 
-        // Clean up old sparkles
         if (timeoutRef.current) clearTimeout(timeoutRef.current);
         timeoutRef.current = setTimeout(() => {
-            setSparkles((prev) => prev.filter((s) => Date.now() - s.id < 800));
-        }, 900);
+            setSparkles((prev) => prev.filter((s) => Date.now() - s.id < 900));
+        }, 1000);
     }, []);
 
     useEffect(() => {
@@ -117,6 +119,7 @@ export function SparkleOnClick() {
                         fontSize: `${s.size}px`,
                         '--tx': `${s.tx}px`,
                         '--ty': `${s.ty}px`,
+                        '--rot': `${s.rotation}deg`,
                     }}
                 >
                     {s.emoji}

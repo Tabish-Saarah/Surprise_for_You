@@ -1,16 +1,16 @@
 :root {
-  /* Colors */
-  --deep-night: #0B0D17;
-  --deep-purple: #1a1030;
-  --accent-purple: #2d1b4e;
-  --warm-blush: #E8A0BF;
-  --petal-pink: #F5C6D0;
-  --champagne-gold: #C9A96E;
-  --gold-light: #E8D5A3;
-  --ivory-cream: #FAF3E0;
-  --cream-light: #FFFDF5;
+  /* Colors — Ramadan Night Theme */
+  --deep-night: #0A1628;
+  --deep-blue: #0D2137;
+  --accent-teal-deep: #0D3B2E;
+  --crescent-gold: #D4A843;
+  --gold-light: #F0D68A;
+  --lantern-amber: #E8923A;
+  --teal-glow: #2EC4B6;
+  --ivory-cream: #FDF6E3;
+  --cream-light: #FFF8E7;
   --text-dark: #2C2C2C;
-  --white: #FFFFFF;
+  --white: #F8F4E8;
 
   /* Fonts */
   --font-display: 'Playfair Display', Georgia, serif;
@@ -41,8 +41,8 @@
 
   /* Shadows */
   --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.4);
-  --shadow-glow-pink: 0 0 40px rgba(232, 160, 191, 0.3);
-  --shadow-glow-gold: 0 0 30px rgba(201, 169, 110, 0.2);
+  --shadow-glow-gold: 0 0 40px rgba(212, 168, 67, 0.3);
+  --shadow-glow-teal: 0 0 30px rgba(46, 196, 182, 0.2);
 }
 
 /* Reset */
@@ -58,7 +58,7 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
-  background: #0B0D17;
+  background: #0A1628;
 }
 
 body {
@@ -68,9 +68,9 @@ body {
   background: var(--deep-night);
   background: linear-gradient(180deg,
       var(--deep-night) 0%,
-      var(--deep-purple) 40%,
-      var(--accent-purple) 70%,
-      var(--deep-purple) 100%);
+      var(--deep-blue) 40%,
+      var(--accent-teal-deep) 70%,
+      var(--deep-blue) 100%);
   min-height: 100vh;
   overflow-x: hidden;
   line-height: 1.6;
@@ -101,7 +101,7 @@ a {
 }
 
 ::selection {
-  background: rgba(232, 160, 191, 0.3);
+  background: rgba(46, 196, 182, 0.3);
   color: var(--white);
 }
 
@@ -114,7 +114,7 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(232, 160, 191, 0.3);
+  background: rgba(212, 168, 67, 0.3);
   border-radius: 4px;
 }
 
@@ -191,25 +191,25 @@ a {
 
   0%,
   100% {
-    text-shadow: 0 0 40px rgba(232, 160, 191, 0.3);
+    text-shadow: 0 0 40px rgba(212, 168, 67, 0.3);
   }
 
   50% {
-    text-shadow: 0 0 60px rgba(232, 160, 191, 0.5);
+    text-shadow: 0 0 60px rgba(212, 168, 67, 0.5);
   }
 }
 
 @keyframes cardMatchGlow {
   0% {
-    box-shadow: 0 0 0 0 rgba(232, 160, 191, 0.4);
+    box-shadow: 0 0 0 0 rgba(46, 196, 182, 0.4);
   }
 
   50% {
-    box-shadow: 0 0 20px 5px rgba(232, 160, 191, 0.6);
+    box-shadow: 0 0 20px 5px rgba(46, 196, 182, 0.6);
   }
 
   100% {
-    box-shadow: 0 0 0 0 rgba(232, 160, 191, 0);
+    box-shadow: 0 0 0 0 rgba(46, 196, 182, 0);
   }
 }
 

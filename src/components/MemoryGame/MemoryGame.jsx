@@ -111,7 +111,7 @@ export default function MemoryGame({ onWin }) {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
             >
-                Test Your Memory 🧠
+                Test Your Memory 🌙
             </motion.h4>
 
             <div className="game-stats">
@@ -140,7 +140,7 @@ export default function MemoryGame({ onWin }) {
                             className={`card-inner ${card.isFlipped || card.isMatched ? 'flipped' : ''
                                 } ${card.isMatched ? 'matched' : ''}`}
                         >
-                            <div className="card-face card-front">🎀</div>
+                            <div className="card-face card-front">🌙</div>
                             <div className="card-face card-back">{card.emoji}</div>
                         </div>
                     </div>

@@ -6,7 +6,7 @@
 .footer-text {
   font-family: var(--font-handwritten);
   font-size: 20px;
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(248, 244, 232, 0.25);
 }
 
 .scroll-progress {
@@ -14,7 +14,7 @@
   top: 0;
   left: 0;
   height: 2px;
-  background: linear-gradient(90deg, var(--champagne-gold), var(--warm-blush));
+  background: linear-gradient(90deg, var(--crescent-gold), var(--teal-glow));
   z-index: 1001;
   transform-origin: left;
 }

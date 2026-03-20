@@ -35,7 +35,7 @@ export default function PhotoCarousel() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
             >
-                Our Moments ✨
+                Our Moments 🌟
             </motion.h4>
 
             <motion.div

@@ -1,17 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 import Letter from './components/Letter/Letter';
 import Navbar from './components/Navbar/Navbar';
 import Homepage from './components/Homepage/Homepage';
-import PhotoCarousel from './components/PhotoCarousel/PhotoCarousel';
-import MemoryGame from './components/MemoryGame/MemoryGame';
-import WinOverlay from './components/WinOverlay/WinOverlay';
-import VideoModal from './components/VideoModal/VideoModal';
 import { FloatingParticles, SparkleOnClick } from './components/Effects/Effects';
 import './App.css';
 
+// Lazy-load heavier sections so they don't block the transition
+const PhotoCarousel = lazy(() => import('./components/PhotoCarousel/PhotoCarousel'));
+const MemoryGame = lazy(() => import('./components/MemoryGame/MemoryGame'));
+const WinOverlay = lazy(() => import('./components/WinOverlay/WinOverlay'));
+const VideoModal = lazy(() => import('./components/VideoModal/VideoModal'));
+const LetterPage = lazy(() => import('./components/LetterPage/LetterPage'));
+
 export default function App() {
   const [letterDismissed, setLetterDismissed] = useState(false);
+  const [letterExitDone, setLetterExitDone] = useState(false);
   const [showWinOverlay, setShowWinOverlay] = useState(false);
   const [showVideoModal, setShowVideoModal] = useState(false);
 
@@ -20,18 +24,22 @@ export default function App() {
 
   return (
     <>
-      {/* Ambient particles + Click sparkles */}
-      <FloatingParticles />
+      {/* Ambient particles — only after letter exit finishes to reduce GPU work */}
+      {letterExitDone && <FloatingParticles />}
       <SparkleOnClick />
 
-      {/* Letter intro */}
-      <AnimatePresence>
+      {/* Letter intro — fades out on top (z-index:5000) */}
+      <AnimatePresence onExitComplete={() => setLetterExitDone(true)}>
         {!letterDismissed && (
           <Letter onDismiss={() => setLetterDismissed(true)} />
         )}
       </AnimatePresence>
 
-      {/* Main page content */}
+      {/*
+        Main page content — mounts as soon as "Tap to continue" is pressed.
+        The letter sits on top at z-index:5000 and fades out, creating a
+        smooth cross-fade with the content appearing underneath.
+      */}
       {letterDismissed && (
         <>
           {/* Scroll progress bar */}
@@ -45,11 +53,14 @@ export default function App() {
           <motion.main
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 1.0, ease: [0.4, 0, 0.2, 1] }}
           >
             <Homepage />
-            <PhotoCarousel />
-            <MemoryGame onWin={() => setShowWinOverlay(true)} />
+            <Suspense fallback={null}>
+              <LetterPage />
+              <PhotoCarousel />
+              <MemoryGame onWin={() => setShowWinOverlay(true)} />
+            </Suspense>
 
             {/* Secret video section */}
             <section id="secret" className="video-section">
@@ -69,7 +80,7 @@ export default function App() {
                   marginBottom: '40px',
                 }}
               >
-                Something Special 🤫
+                Something Special 🌟
               </motion.h4>
 
               <motion.button
@@ -88,7 +99,7 @@ export default function App() {
 
             {/* Footer */}
             <footer className="app-footer">
-              <p className="footer-text">Made with ❤️ for Saarah</p>
+              <p className="footer-text">Made with ❤️ for Hosneara | Eid Mubarak 🌙</p>
             </footer>
           </motion.main>
         </>

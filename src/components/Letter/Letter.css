@@ -5,102 +5,228 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(180deg, #0B0D17 0%, #1a1030 50%, #0B0D17 100%);
+    background: linear-gradient(180deg, #0A1628 0%, #0D2137 50%, #0A1628 100%);
+    overflow: hidden;
 }
 
-/* Envelope wrapper */
+/* ─── Ambient Background Decorations ─── */
+.letter-ambient {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.ambient-crescent {
+    position: absolute;
+    top: 8%;
+    right: 12%;
+    font-size: 64px;
+    opacity: 0.12;
+    animation: floatSlow 8s ease-in-out infinite;
+    filter: drop-shadow(0 0 30px rgba(212, 168, 67, 0.4));
+}
+
+.ambient-star {
+    position: absolute;
+    opacity: 0;
+    animation: twinkle 3s ease-in-out infinite;
+    color: rgba(240, 214, 138, 0.5);
+}
+
+.star-1 { top: 15%; left: 18%; font-size: 12px; animation-delay: 0s; }
+.star-2 { top: 25%; right: 22%; font-size: 8px; animation-delay: 1s; }
+.star-3 { bottom: 30%; left: 10%; font-size: 14px; animation-delay: 2s; }
+
+.ambient-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(212, 168, 67, 0.06) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: breatheGlow 6s ease-in-out infinite;
+}
+
+@keyframes floatSlow {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(5deg); }
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.1; transform: scale(0.8); }
+    50% { opacity: 0.7; transform: scale(1.2); }
+}
+
+@keyframes breatheGlow {
+    0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+/* ─── Envelope ─── */
 .envelope {
     position: relative;
-    width: min(420px, 85vw);
+    width: min(440px, 88vw);
     cursor: pointer;
-    perspective: 800px;
+    z-index: 1;
 }
 
-/* Envelope body */
-.envelope-body {
-    background: var(--ivory-cream);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-card);
-    padding: 40px 32px;
-    position: relative;
-    z-index: 2;
-    min-height: 200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: min-height 0.6s var(--ease-smooth);
-}
-
-.envelope-body.is-open {
-    min-height: 380px;
-    align-items: flex-start;
-    justify-content: flex-start;
-}
-
-/* Envelope flap */
+/* ─── Envelope Flap (Triangle overlaying top of card) ─── */
 .envelope-flap {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     height: 120px;
-    z-index: 1;
+    z-index: 5;
     transform-origin: top center;
     transform-style: preserve-3d;
-    transition: transform 0.8s var(--ease-smooth);
+    transition: transform 1s var(--ease-smooth);
+    pointer-events: none;
 }
 
 .envelope-flap.is-open {
     transform: rotateX(-180deg);
     opacity: 0;
-    pointer-events: none;
-    transition: transform 0.8s var(--ease-smooth), opacity 0.5s 0.3s var(--ease-smooth);
+    transition: transform 1s var(--ease-smooth), opacity 0.6s 0.4s var(--ease-smooth);
 }
 
 .flap-front {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, #e8dccf 0%, var(--ivory-cream) 100%);
+    background: linear-gradient(180deg, #d4c4a0 0%, #e8dccf 40%, var(--ivory-cream) 100%);
     clip-path: polygon(0 0, 50% 100%, 100% 0);
     border-radius: var(--radius-md) var(--radius-md) 0 0;
     backface-visibility: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.flap-ornament {
+    position: absolute;
+    top: 18%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 16px;
+    opacity: 0.2;
+    color: var(--crescent-gold);
 }
 
 .flap-back {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, #e8dccf, #d4c5b5);
+    background: linear-gradient(135deg, #d4c4a0, #bfae8e);
     clip-path: polygon(0 0, 50% 100%, 100% 0);
     backface-visibility: hidden;
     transform: rotateX(180deg);
 }
 
-/* Front label */
+/* ─── Wax Seal (at the tip of the flap triangle) ─── */
+.wax-seal {
+    position: absolute;
+    top: 96px;
+    left: 50%;
+    margin-left: -26px;
+    z-index: 10;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #D4A843, #b8912e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    box-shadow:
+        0 4px 20px rgba(212, 168, 67, 0.5),
+        inset 0 2px 4px rgba(255, 255, 255, 0.3),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.wax-seal.is-open {
+    pointer-events: none;
+}
+
+/* ─── Envelope Body (single unified card) ─── */
+.envelope-body {
+    background: linear-gradient(145deg, #FDF6E3 0%, #F5EDD6 50%, #FDF6E3 100%);
+    border-radius: var(--radius-md);
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(212, 168, 67, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    /* Key: large top padding pushes content below the flap area */
+    padding: 150px 36px 44px;
+    position: relative;
+    z-index: 2;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: min-height 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                padding 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.envelope-body.is-open {
+    min-height: 400px;
+    padding-top: 36px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border-radius: var(--radius-md);
+}
+
+/* ─── Corner Ornaments ─── */
+.envelope-ornament {
+    position: absolute;
+    font-size: 10px;
+    color: rgba(212, 168, 67, 0.25);
+    transition: all 0.8s var(--ease-smooth);
+}
+
+.top-left { top: 12px; left: 14px; }
+.top-right { top: 12px; right: 14px; }
+.bottom-left { bottom: 12px; left: 14px; }
+.bottom-right { bottom: 12px; right: 14px; }
+
+.envelope-body.is-open .envelope-ornament {
+    color: rgba(212, 168, 67, 0.4);
+}
+
+/* ─── Front Label (inside card, below flap) ─── */
 .envelope-front-label {
     text-align: center;
     z-index: 1;
 }
 
+.envelope-bismillah {
+    font-size: 20px;
+    font-weight: 700;
+    color: rgba(180, 140, 40, 0.85);
+    margin-bottom: 16px;
+    letter-spacing: 3px;
+    text-shadow: 0 1px 4px rgba(212, 168, 67, 0.3);
+}
+
 .envelope-front-label h2 {
     font-family: var(--font-handwritten);
-    font-size: 32px;
+    font-size: 34px;
     color: var(--text-dark);
     font-weight: 400;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .envelope-front-label p {
     font-family: var(--font-body);
     font-size: 14px;
-    color: rgba(44, 44, 44, 0.5);
+    color: rgba(44, 44, 44, 0.45);
     font-weight: 300;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     animation: pulse 2s ease-in-out infinite;
 }
 
-/* Letter content inside */
+/* ─── Letter Content ─── */
 .letter-content {
     width: 100%;
     padding-top: 8px;
@@ -122,22 +248,26 @@
 .letter-content .letter-highlight {
     font-family: var(--font-accent);
     font-size: 32px;
-    color: var(--champagne-gold);
-    margin-top: 24px;
+    color: var(--crescent-gold);
+    margin-top: 28px;
     text-align: center;
+    text-shadow: 0 0 30px rgba(212, 168, 67, 0.3);
+    animation: highlightGlow 3s ease-in-out infinite;
 }
 
-/* Swipe indicator */
+@keyframes highlightGlow {
+    0%, 100% { text-shadow: 0 0 20px rgba(212, 168, 67, 0.2); }
+    50% { text-shadow: 0 0 40px rgba(212, 168, 67, 0.5); }
+}
+
+/* ─── Swipe Indicator ─── */
 .swipe-indicator {
-    position: absolute;
-    bottom: -70px;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-top: 28px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(248, 244, 232, 0.5);
 }
 
 .swipe-indicator span {
@@ -152,13 +282,30 @@
     animation: gentleBounce 1.5s ease-in-out infinite;
 }
 
+/* ─── Responsive ─── */
 @media (max-width: 640px) {
     .envelope-body {
-        padding: 28px 20px;
+        padding: 130px 22px 36px;
+    }
+
+    .envelope-body.is-open {
+        padding-top: 28px;
+    }
+
+    .envelope-flap {
+        height: 100px;
+    }
+
+    .wax-seal {
+        width: 42px;
+        height: 42px;
+        font-size: 18px;
+        top: 78px;
+        margin-left: -21px;
     }
 
     .envelope-front-label h2 {
-        font-size: 26px;
+        font-size: 28px;
     }
 
     .letter-content p {
@@ -171,5 +318,11 @@
 
     .letter-content .letter-highlight {
         font-size: 26px;
+    }
+
+    .ambient-crescent {
+        font-size: 42px;
+        top: 6%;
+        right: 8%;
     }
 }

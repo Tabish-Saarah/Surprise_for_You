@@ -4,6 +4,7 @@ import './Navbar.css';
 
 const navItems = [
     { id: 'surprise', label: 'Surprise' },
+    { id: 'letter', label: 'Letter' },
     { id: 'photos', label: 'Photos' },
     { id: 'memory-game', label: 'Memory Game' },
     { id: 'secret', label: 'Secret' },

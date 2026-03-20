@@ -11,25 +11,33 @@
     border-radius: 50%;
     opacity: 0;
     animation: floatParticle linear infinite;
+    will-change: transform, opacity;
 }
 
 @keyframes floatParticle {
     0% {
         opacity: 0;
-        transform: translateY(100vh) scale(0);
+        transform: translateY(100vh) translateX(0) scale(0);
     }
 
     10% {
         opacity: var(--particle-opacity, 0.4);
+        transform: translateY(80vh) translateX(calc(var(--particle-drift, 0px) * 0.2)) scale(0.5);
+    }
+
+    50% {
+        opacity: var(--particle-opacity, 0.4);
+        transform: translateY(40vh) translateX(var(--particle-drift, 0px)) scale(1);
     }
 
     90% {
         opacity: var(--particle-opacity, 0.4);
+        transform: translateY(5vh) translateX(calc(var(--particle-drift, 0px) * 0.5)) scale(0.8);
     }
 
     100% {
         opacity: 0;
-        transform: translateY(-10vh) scale(1);
+        transform: translateY(-10vh) translateX(0) scale(0.3);
     }
 }
 
@@ -46,17 +54,22 @@
     position: absolute;
     pointer-events: none;
     font-size: 14px;
-    animation: sparkleBurst 0.8s ease-out forwards;
+    animation: sparkleBurst 0.9s ease-out forwards;
 }
 
 @keyframes sparkleBurst {
     0% {
         opacity: 1;
-        transform: translate(0, 0) scale(1);
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+
+    60% {
+        opacity: 0.8;
+        transform: translate(calc(var(--tx) * 0.8), calc(var(--ty) * 0.8)) scale(1.1) rotate(calc(var(--rot, 0deg) * 0.5));
     }
 
     100% {
         opacity: 0;
-        transform: translate(var(--tx), var(--ty)) scale(0);
+        transform: translate(var(--tx), var(--ty)) scale(0) rotate(var(--rot, 0deg));
     }
 }

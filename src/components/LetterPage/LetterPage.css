@@ -1,0 +1,81 @@
+.letter-page-section {
+    padding: var(--section-padding-desktop) 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lp-card {
+    position: relative;
+    width: min(480px, 90vw);
+    background: linear-gradient(145deg, #FDF6E3 0%, #F5EDD6 50%, #FDF6E3 100%);
+    border-radius: var(--radius-md);
+    padding: 44px 40px;
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(212, 168, 67, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* Corner ornaments */
+.lp-ornament {
+    position: absolute;
+    font-size: 10px;
+    color: rgba(212, 168, 67, 0.35);
+}
+
+.lp-tl { top: 14px; left: 16px; }
+.lp-tr { top: 14px; right: 16px; }
+.lp-bl { bottom: 14px; left: 16px; }
+.lp-br { bottom: 14px; right: 16px; }
+
+/* Letter text */
+.lp-line {
+    font-family: var(--font-handwritten);
+    font-size: 20px;
+    color: var(--text-dark);
+    line-height: 1.9;
+    margin-bottom: 8px;
+}
+
+.lp-greeting {
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+.lp-highlight {
+    font-family: var(--font-accent);
+    font-size: 32px;
+    color: var(--crescent-gold);
+    margin-top: 28px;
+    text-align: center;
+    text-shadow: 0 0 25px rgba(212, 168, 67, 0.3);
+    animation: highlightGlow 3s ease-in-out infinite;
+}
+
+@keyframes highlightGlow {
+    0%, 100% { text-shadow: 0 0 20px rgba(212, 168, 67, 0.2); }
+    50% { text-shadow: 0 0 40px rgba(212, 168, 67, 0.5); }
+}
+
+@media (max-width: 640px) {
+    .letter-page-section {
+        padding: var(--section-padding-mobile) 16px;
+    }
+
+    .lp-card {
+        padding: 32px 24px;
+    }
+
+    .lp-line {
+        font-size: 17px;
+    }
+
+    .lp-greeting {
+        font-size: 20px;
+    }
+
+    .lp-highlight {
+        font-size: 26px;
+    }
+}
